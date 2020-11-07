@@ -582,7 +582,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StartButton: {fileID: 947447478}
   InstructButton: {fileID: 0}
-  scene1: StartScene
+  scene1: GameOver
   scene2: 
   clickSound: {fileID: 0}
 --- !u!1 &718469525
