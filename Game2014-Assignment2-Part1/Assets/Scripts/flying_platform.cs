@@ -1,4 +1,12 @@
-﻿using UnityEngine;
+﻿/*
+GAME2014_A2_BARNES_ALEXANDER
+flying_platform
+controls flying platform making it going up and down to a set position using lerp and math f pingpong
+found base code online and didnt have to tweak much
+ LAST MODIFIED 11/16/2020
+ VERSION 1.0.0
+ */
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
