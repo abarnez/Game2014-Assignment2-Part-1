@@ -33,16 +33,11 @@ public class Button_Manager : MonoBehaviour
     }
     void TaskOnClick()
     {
-
         SceneManager.LoadScene(scene1);
-
         //clickSound.Play();
-
-
     }
     void TaskOnClick2()
     {
-
         SceneManager.LoadScene(scene2);
        // clickSound.Play();
     }

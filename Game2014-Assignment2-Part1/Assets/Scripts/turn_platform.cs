@@ -11,16 +11,10 @@ using UnityEngine;
 
 public class turn_platform : MonoBehaviour
 {
-    // Start is called before the first frame update
-
-
-    // Update is called once per frame
     void Update()
     {
         Rotate();
     }
-
-
 
     public void Rotate()
     {

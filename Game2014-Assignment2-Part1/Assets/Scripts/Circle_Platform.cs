@@ -12,24 +12,20 @@ using UnityEngine;
 public class Circle_Platform : MonoBehaviour
 {
 
-    private float RotateSpeed = 1f;
+    private float Speed = 1f;
     private float Radius = 1.0f;
-
-    private Vector2 _centre;
-    private float _angle;
+    private Vector2 centre;
+    private float angle;
 
     private void Start()
     {
-        _centre = transform.position;
+        centre = transform.position;
     }
 
     private void Update()
     {
-
-        _angle += RotateSpeed * Time.deltaTime;
-
-        var offset = new Vector2(Mathf.Sin(_angle), Mathf.Cos(_angle)) * Radius;
-        transform.position = _centre + offset;
+        angle += Speed * Time.deltaTime;
+        var offset = new Vector2(Mathf.Sin(angle), Mathf.Cos(angle)) * Radius;
+        transform.position = centre + offset;
     }
-
 }

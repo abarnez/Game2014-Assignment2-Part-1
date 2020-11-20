@@ -354,7 +354,7 @@ GameObject:
   - component: {fileID: 201902631}
   - component: {fileID: 201902632}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Destination
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2368,6 +2368,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 282224488752828527, guid: d57adaa3c04e75b4db5db78599042f48, type: 3}
       propertyPath: farEnd
+      value: 
+      objectReference: {fileID: 201902631}
+    - target: {fileID: 282224488752828527, guid: d57adaa3c04e75b4db5db78599042f48, type: 3}
+      propertyPath: dest
       value: 
       objectReference: {fileID: 201902631}
     - target: {fileID: 282224488752828531, guid: d57adaa3c04e75b4db5db78599042f48, type: 3}
