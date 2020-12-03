@@ -21,6 +21,18 @@ public class Button_Manager : MonoBehaviour
     public string scene2;
     public AudioSource clickSound;
 
+    IEnumerator DelaySceneLoad()
+    {
+        yield return new WaitForSeconds(clickSound.clip.length);
+        SceneManager.LoadScene(scene1);
+    }
+
+    IEnumerator DelaySceneLoad2()
+    {
+        yield return new WaitForSeconds(clickSound.clip.length);
+        SceneManager.LoadScene(scene2);
+    }
+
 
     void Start()
     {
@@ -33,13 +45,18 @@ public class Button_Manager : MonoBehaviour
     }
     void TaskOnClick()
     {
-        SceneManager.LoadScene(scene1);
-        //clickSound.Play();
+        clickSound.Play();
+      
+       // SceneManager.LoadScene(scene1);
+        StartCoroutine(DelaySceneLoad());
+
+
     }
     void TaskOnClick2()
     {
-        SceneManager.LoadScene(scene2);
-       // clickSound.Play();
+        clickSound.Play();
+        StartCoroutine(DelaySceneLoad2());
+
     }
 
 }
