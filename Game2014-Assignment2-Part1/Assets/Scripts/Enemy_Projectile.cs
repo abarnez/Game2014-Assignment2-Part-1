@@ -6,6 +6,7 @@ public class Enemy_Projectile : MonoBehaviour
 {
     public float speed;
     Rigidbody2D rb;
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +33,7 @@ public class Enemy_Projectile : MonoBehaviour
 
             Destroy(gameObject);
         }
+
 
     }
     public void OnTriggerEnter2D(Collider2D other)

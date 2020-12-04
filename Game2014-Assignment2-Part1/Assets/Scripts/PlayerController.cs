@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,11 +15,16 @@ public class PlayerController : MonoBehaviour
     public float verticalForce;
     public Button Jump;
     public bool onGround;
+    public string Scene;
+
+    public int health;
+    public Transform spawn;
 
     private Rigidbody2D m_rigidBody2D;
     // Start is called before the first frame update
     void Start()
     {
+        health = 3;
         m_rigidBody2D = GetComponent<Rigidbody2D>();
         Button btn = Jump.GetComponent<Button>();
         btn.onClick.AddListener(TaskOnClick);
@@ -28,6 +34,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Move();
+        Die();
     }
 
     void Move()
@@ -61,6 +68,20 @@ public class PlayerController : MonoBehaviour
         {
             onGround = true;
         }
+
+        if (other.gameObject.CompareTag("Damage"))
+        {
+            
+        }
+    }
+
+    public void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.tag == "Damage")
+        {
+            Damage();
+           
+        }
     }
 
     private void OnCollisionExit2D(Collision2D other)
@@ -71,7 +92,25 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void Respawn()
+    {
+        transform.position = spawn.position;
+    }
 
+    public void Damage()
+    {      
+           Respawn();
+            Debug.Log("ouch");           
+            health--;      
+    }
+
+    public void Die()
+    {
+        if (health == 0)
+        {
+            SceneManager.LoadScene(Scene);
+        }
+    }
     void TaskOnClick()
     {
         if(onGround)

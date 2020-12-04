@@ -37,7 +37,7 @@ public class EnemyScript : MonoBehaviour
             {
                 transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
             }
-            Debug.Log("I see player");
+            
             canShoot = true;
         }
 
@@ -50,7 +50,7 @@ public class EnemyScript : MonoBehaviour
         if (other.tag == "Player")
         {
          
-            Debug.Log("I cant see player");
+           
             canShoot = false;
         }
 
