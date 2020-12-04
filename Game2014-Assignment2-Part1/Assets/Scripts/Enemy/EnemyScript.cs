@@ -7,6 +7,7 @@ public class EnemyScript : MonoBehaviour
     public bool canShoot;
     public GameObject bullet;
     public Transform firePoint;
+    public AudioSource fire;
     // Start is called before the first frame update
     void Start()
     {
@@ -60,6 +61,7 @@ public class EnemyScript : MonoBehaviour
     {
         if(Time.frameCount % 550 == 0)
         {
+            fire.Play();
             Instantiate(bullet, firePoint.transform.position, transform.rotation);
             bullet.transform.right = transform.right.normalized;
         }

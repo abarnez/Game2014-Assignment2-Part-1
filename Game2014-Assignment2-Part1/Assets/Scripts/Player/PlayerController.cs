@@ -19,8 +19,18 @@ public class PlayerController : MonoBehaviour
 
     public int health;
     public Transform spawn;
+    public AudioSource hit;
+    public AudioSource gameover;
 
     private Rigidbody2D m_rigidBody2D;
+    IEnumerator DelayGameOversound()
+    {
+        gameover.Play();
+      //  audioSource.PlayOneShot(gameover);
+        yield return new WaitForSeconds(gameover.clip.length);
+        SceneManager.LoadScene(Scene);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -98,17 +108,19 @@ public class PlayerController : MonoBehaviour
     }
 
     public void Damage()
-    {      
-           Respawn();
-            Debug.Log("ouch");           
+    {
+        hit.Play();
+           Respawn();                    
             health--;      
     }
 
     public void Die()
     {
+        
         if (health == 0)
         {
-            SceneManager.LoadScene(Scene);
+            
+            StartCoroutine(DelayGameOversound());
         }
     }
     void TaskOnClick()
