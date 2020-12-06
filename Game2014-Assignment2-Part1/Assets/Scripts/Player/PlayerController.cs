@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     public Transform spawn;
     public AudioSource hit;
     public AudioSource gameover;
+    public Animator pAnimation;
 
     private Rigidbody2D m_rigidBody2D;
     IEnumerator DelayGameOversound()
@@ -34,6 +35,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        pAnimation = GetComponent<Animator>();
         health = 3;
         m_rigidBody2D = GetComponent<Rigidbody2D>();
         Button btn = Jump.GetComponent<Button>();
@@ -53,14 +55,21 @@ public class PlayerController : MonoBehaviour
         {
             // move right
             m_rigidBody2D.AddForce(Vector2.right * horizontalForce * Time.deltaTime);
+            pAnimation.SetInteger("AnimState", 1);
             transform.localScale = new Vector3(6.0f, 6.0f, 1.0f);
-
+            
+          
         }
-        if (joystick.Horizontal < -joystickHorizontalSensitivity)
+       else  if (joystick.Horizontal < -joystickHorizontalSensitivity)
         {
             // move left
             m_rigidBody2D.AddForce(Vector2.left * horizontalForce * Time.deltaTime);
             transform.localScale = new Vector3(-6.0f, 6.0f, 1.0f);
+            pAnimation.SetInteger("AnimState", 1);
+        } else
+        {
+            pAnimation.SetInteger("AnimState", 0);
+           
         }
     }
 
@@ -90,7 +99,7 @@ public class PlayerController : MonoBehaviour
         if (other.tag == "Damage")
         {
             Damage();
-           
+            pAnimation.SetInteger("AnimState", 2);
         }
     }
 

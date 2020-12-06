@@ -25,17 +25,7 @@ public class Enemy_Projectile : MonoBehaviour
         rb.velocity = transform.right * speed;
     }
 
-    public void OnCollisionEnter2D(Collider2D other)
-    {
-
-        if (other.tag == "Player")
-        {
-
-            Destroy(gameObject);
-        }
-
-
-    }
+ 
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
