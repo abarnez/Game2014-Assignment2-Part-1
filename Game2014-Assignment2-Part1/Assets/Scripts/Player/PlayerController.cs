@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,11 +18,17 @@ public class PlayerController : MonoBehaviour
     public bool onGround;
     public string Scene;
 
+    public bool onPlat;
+    public float clamp;
     public int health;
     public Transform spawn;
     public AudioSource hit;
     public AudioSource gameover;
     public Animator pAnimation;
+    public float Score;
+    public TMP_Text score;
+
+    private Transform platform;
 
     private Rigidbody2D m_rigidBody2D;
     IEnumerator DelayGameOversound()
@@ -45,8 +52,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         Move();
         Die();
+        if (onPlat)
+        {
+            Mathf.Clamp(transform.position.y, clamp, clamp);
+        }
+        score.text = "Score: " + Score;
     }
 
     void Move()
@@ -57,8 +70,8 @@ public class PlayerController : MonoBehaviour
             m_rigidBody2D.AddForce(Vector2.right * horizontalForce * Time.deltaTime);
             pAnimation.SetInteger("AnimState", 1);
             transform.localScale = new Vector3(6.0f, 6.0f, 1.0f);
-            
-          
+            transform.parent = null;
+
         }
        else  if (joystick.Horizontal < -joystickHorizontalSensitivity)
         {
@@ -66,6 +79,7 @@ public class PlayerController : MonoBehaviour
             m_rigidBody2D.AddForce(Vector2.left * horizontalForce * Time.deltaTime);
             transform.localScale = new Vector3(-6.0f, 6.0f, 1.0f);
             pAnimation.SetInteger("AnimState", 1);
+            transform.parent = null;
         } else
         {
             pAnimation.SetInteger("AnimState", 0);
@@ -88,8 +102,14 @@ public class PlayerController : MonoBehaviour
             onGround = true;
         }
 
-        if (other.gameObject.CompareTag("Damage"))
+
+
+        if (other.gameObject.CompareTag("Platform"))
         {
+            clamp = transform.position.y;
+            platform = other.gameObject.transform;
+            transform.SetParent(platform);
+            onPlat = true;
             
         }
     }
@@ -101,6 +121,12 @@ public class PlayerController : MonoBehaviour
             Damage();
             pAnimation.SetInteger("AnimState", 2);
         }
+
+        if (other.tag == "Points")
+        {
+            Score += 10.0f;
+            Debug.Log(Score);
+        }
     }
 
     private void OnCollisionExit2D(Collision2D other)
@@ -109,6 +135,14 @@ public class PlayerController : MonoBehaviour
         {
             onGround = false;
         }
+
+        if (other.gameObject.CompareTag("Platform"))
+        {
+            platform = null;
+            Debug.Log("wtf");
+            onPlat = false;
+        }
+
     }
 
     public void Respawn()

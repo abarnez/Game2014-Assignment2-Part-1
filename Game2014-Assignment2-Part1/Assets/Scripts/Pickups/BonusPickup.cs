@@ -24,6 +24,7 @@ public class BonusPickup : MonoBehaviour
         if (other.tag == "Player")
         {
             coin.Play();
+            gameObject.GetComponent<Renderer>().enabled = false;
             StartCoroutine(DelayObjectDestroy());
         }
     }

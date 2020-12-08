@@ -6,6 +6,9 @@ TagManager:
   tags:
   - ground
   - Damage
+  - Collider
+  - Platform
+  - Points
   layers:
   - Default
   - TransparentFX
