@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
+
 public class PlayerController : MonoBehaviour
 {
 
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour
     public Animator pAnimation;
     public float Score;
     public TMP_Text score;
+    public Animator livesHUD;
 
     private Transform platform;
 
@@ -126,6 +128,7 @@ public class PlayerController : MonoBehaviour
         {
             Score += 10.0f;
             Debug.Log(Score);
+            PlayerPrefs.SetFloat("highscore", Score);
         }
     }
 
@@ -152,9 +155,12 @@ public class PlayerController : MonoBehaviour
 
     public void Damage()
     {
+        
+        
         hit.Play();
            Respawn();                    
-            health--;      
+            health--;
+        livesHUD.SetInteger("livesState", health);
     }
 
     public void Die()
