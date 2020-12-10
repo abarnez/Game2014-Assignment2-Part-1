@@ -12,8 +12,8 @@ using UnityEngine;
 public class Circle_Platform : MonoBehaviour
 {
 
-    private float Speed = 1f;
-    private float Radius = 1.0f;
+    private float Speed = 0.5f;
+    public  float Radius = 1.0f;
     private Vector2 centre;
     private float angle;
 

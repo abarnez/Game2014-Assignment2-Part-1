@@ -59,7 +59,8 @@ public class PlayerController : MonoBehaviour
         Die();
         if (onPlat)
         {
-            Mathf.Clamp(transform.position.y, clamp, clamp);
+            // Mathf.Clamp(transform.position.y, clamp, clamp);
+            
         }
         score.text = "Score: " + Score;
     }
@@ -95,6 +96,18 @@ public class PlayerController : MonoBehaviour
         {
             onGround = true;
         }
+        
+        if (other.gameObject.CompareTag("Platform"))
+        {
+            //clamp = transform.position.y;
+            
+            //  gameObject.transform.position = other.gameObject.transform.position;
+            transform.SetParent(other.gameObject.transform);
+            onPlat = true;
+            Debug.Log("on plat");
+
+        }
+        
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -105,16 +118,22 @@ public class PlayerController : MonoBehaviour
         }
 
 
-
+        
         if (other.gameObject.CompareTag("Platform"))
         {
-            clamp = transform.position.y;
-            platform = other.gameObject.transform;
-            transform.SetParent(platform);
-            onPlat = true;
+            //clamp = transform.position.y;
             
+            
+            transform.SetParent(other.gameObject.transform);
+            onPlat = true;
+            Debug.Log("on plat");
+            //Stop();
+
         }
+        
     }
+
+   
 
     public void OnTriggerExit2D(Collider2D other)
     {
@@ -141,8 +160,9 @@ public class PlayerController : MonoBehaviour
 
         if (other.gameObject.CompareTag("Platform"))
         {
-            platform = null;
-            Debug.Log("wtf");
+            platform = other.gameObject.transform;
+            transform.SetParent(null);
+            Debug.Log("left plat");
             onPlat = false;
         }
 
@@ -151,6 +171,11 @@ public class PlayerController : MonoBehaviour
     public void Respawn()
     {
         transform.position = spawn.position;
+    }
+
+    public void Stop()
+    {
+        m_rigidBody2D.velocity = new Vector3(0.0f,0.0f,0.0f);
     }
 
     public void Damage()
