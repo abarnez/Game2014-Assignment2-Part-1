@@ -19,7 +19,7 @@ public class spike_platform : MonoBehaviour
 
     public void Rotate()
     {
-        if (Time.frameCount % 350 == 0)
+        if (Time.frameCount % 650 == 0)
         {
             transform.Rotate(0.0f, 0.0f, 180.0f);
         }

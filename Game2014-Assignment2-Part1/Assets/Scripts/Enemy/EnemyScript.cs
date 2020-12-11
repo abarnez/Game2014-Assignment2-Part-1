@@ -59,7 +59,7 @@ public class EnemyScript : MonoBehaviour
 
     public void Shoot()
     {
-        if(Time.frameCount % 550 == 0)
+        if(Time.frameCount % 650 == 0)
         {
             fire.Play();
             Instantiate(bullet, firePoint.transform.position, transform.rotation);

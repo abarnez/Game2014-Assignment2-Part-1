@@ -54,14 +54,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(onGround)
         Move();
+
         Die();
-        if (onPlat)
-        {
-            // Mathf.Clamp(transform.position.y, clamp, clamp);
-            
-        }
         score.text = "Score: " + Score;
     }
 
@@ -92,20 +88,15 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("ground"))
+        if (other.gameObject.CompareTag("ground") || other.gameObject.CompareTag("Platform"))
         {
             onGround = true;
         }
         
         if (other.gameObject.CompareTag("Platform"))
         {
-            //clamp = transform.position.y;
-            
-            //  gameObject.transform.position = other.gameObject.transform.position;
             transform.SetParent(other.gameObject.transform);
-            onPlat = true;
-            Debug.Log("on plat");
-
+            onPlat = true;         
         }
         
     }
@@ -116,24 +107,13 @@ public class PlayerController : MonoBehaviour
         {
             onGround = true;
         }
-
-
-        
+       
         if (other.gameObject.CompareTag("Platform"))
-        {
-            //clamp = transform.position.y;
-            
-            
+        {        
             transform.SetParent(other.gameObject.transform);
             onPlat = true;
-            Debug.Log("on plat");
-            //Stop();
-
-        }
-        
+        }      
     }
-
-   
 
     public void OnTriggerExit2D(Collider2D other)
     {
@@ -145,8 +125,7 @@ public class PlayerController : MonoBehaviour
 
         if (other.tag == "Points")
         {
-            Score += 10.0f;
-            Debug.Log(Score);
+            Score += 10.0f;        
             PlayerPrefs.SetFloat("highscore", Score);
         }
     }
@@ -162,7 +141,6 @@ public class PlayerController : MonoBehaviour
         {
             platform = other.gameObject.transform;
             transform.SetParent(null);
-            Debug.Log("left plat");
             onPlat = false;
         }
 
@@ -171,6 +149,7 @@ public class PlayerController : MonoBehaviour
     public void Respawn()
     {
         transform.position = spawn.position;
+        transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 
     public void Stop()

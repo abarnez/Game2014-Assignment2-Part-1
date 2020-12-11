@@ -11,9 +11,4 @@ public class PlayerScore : MonoBehaviour
         score.text = "Final Score: " + PlayerPrefs.GetFloat("highscore");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
