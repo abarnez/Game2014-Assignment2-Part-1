@@ -9,6 +9,7 @@ TagManager:
   - Collider
   - Platform
   - Points
+  - GameEnd
   layers:
   - Default
   - TransparentFX

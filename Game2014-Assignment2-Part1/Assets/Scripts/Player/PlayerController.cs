@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     public Button Jump;
     public bool onGround;
     public string Scene;
+    public string Scene1;
 
     public bool onPlat;
     public float clamp;
@@ -36,7 +37,8 @@ public class PlayerController : MonoBehaviour
     IEnumerator DelayGameOversound()
     {
         gameover.Play();
-      //  audioSource.PlayOneShot(gameover);
+        //  audioSource.PlayOneShot(gameover);
+        pAnimation.SetInteger("AnimState", 2);
         yield return new WaitForSeconds(gameover.clip.length);
         SceneManager.LoadScene(Scene);
     }
@@ -128,6 +130,18 @@ public class PlayerController : MonoBehaviour
             Score += 10.0f;        
             PlayerPrefs.SetFloat("highscore", Score);
         }
+
+    
+    }
+
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "GameEnd")
+        {
+            Score += 100.0f;
+            SceneManager.LoadScene(Scene1);
+            PlayerPrefs.SetFloat("highscore", Score);
+        }
     }
 
     private void OnCollisionExit2D(Collision2D other)
@@ -148,8 +162,11 @@ public class PlayerController : MonoBehaviour
 
     public void Respawn()
     {
-        transform.position = spawn.position;
-        transform.rotation = Quaternion.Euler(0, 0, 0);
+        if (health > 1)
+        {
+            transform.position = spawn.position;
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
     }
 
     public void Stop()
