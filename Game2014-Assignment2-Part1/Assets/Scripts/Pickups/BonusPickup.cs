@@ -1,4 +1,12 @@
-﻿using System.Collections;
+﻿/*
+GAME2014_A2_BARNES_ALEXANDER
+bonus pickup
+destorys itself and plays sound on collision with player
+ LAST MODIFIED 12/11/2020
+ VERSION 1.0.0
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

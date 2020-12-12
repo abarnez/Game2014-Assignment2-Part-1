@@ -1,4 +1,12 @@
-﻿using System.Collections;
+﻿/*
+GAME2014_A2_BARNES_ALEXANDER
+enemy projectile
+moves game object to the right
+ LAST MODIFIED 11/16/2020
+ VERSION 1.0.0
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
